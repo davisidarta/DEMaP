@@ -16,7 +16,7 @@ metric_xlabels = {
     "n_genes": "# of genes retained",
 }
 dataset_ylabels = {"groups": "Splatter Groups", "paths": "Splatter Paths"}
-method_colors = {"dbMAP": "k", "PHATE": "tab:grey", "TSNE_on_DM": "tab:orange"}
+method_colors = {"PHATE": "k", "MDS_on_DM": "tab:grey", "TSNE_on_DM": "tab:orange"}
 
 
 def map_color(method):

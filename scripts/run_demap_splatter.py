@@ -7,7 +7,7 @@ import demap
 from joblib import Parallel, delayed
 from functools import partial
 
-N_JOBS = 12
+N_JOBS = 3
 
 
 def measure_method(data, data_noised, method, data_name, subsample_idx=None):
@@ -81,7 +81,7 @@ def measure_splat_range(
             measure_all_methods(
                 data_truth,
                 load_fn,
-                load_params=dict(**{var_name: var_value}, seed=seed, **load_kwargs),
+                load_params=dict(**{var_name: var_value} , seed=seed, **load_kwargs),
                 n_jobs=n_jobs,
                 seed=seed,
             )
