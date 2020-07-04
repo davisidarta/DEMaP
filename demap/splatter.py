@@ -194,9 +194,10 @@ def _load_splat(
     dropout=0.5,
     bcv=0.18,
     method="paths",
-    n_genes=17580,
+    n_genes=5000,
     seed=None,
     return_groups=False,
+    n_pca=100,
     **kwargs
 ):
     np.random.seed(seed)
@@ -204,8 +205,8 @@ def _load_splat(
     data = SplatSimulate(
         method=method,
         seed=seed,
-        batchCells=10000,  # 16825,
-        nGenes=17580,
+        batchCells=1000,  # 16825,
+        nGenes=5000,
         mean_shape=6.6,
         mean_rate=0.45,
         lib_loc=8.4 + np.log(2),
@@ -226,7 +227,8 @@ def _load_splat(
         data = data[:, np.random.choice(data.shape[1], n_genes, replace=False)]
     data = scprep.normalize.library_size_normalize(data)
     data = scprep.transform.sqrt(data)
-    data = PCA(data, n_components=100)
+    if n_pca is not None:
+        data = PCA(data, n_components=n_pca)
     if return_groups:
         data = (data, branch)
     return data
@@ -235,7 +237,7 @@ def _load_splat(
 def paths(
     dropout=0.5,
     bcv=0.18,
-    n_genes=17580,
+    n_genes=5000,
     seed=None,
     # hyperparameters
     group_prob_rate=10,
@@ -271,7 +273,7 @@ def paths(
 def groups(
     dropout=0.5,
     bcv=0.18,
-    n_genes=17580,
+    n_genes=5000,
     seed=None,
     # hyperparameters
     group_prob_rate=10,
